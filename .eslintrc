@@ -37,6 +37,12 @@
     "tailwindcss/classnames-order": "warn",
     "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/no-contradicting-classname": "error",
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "prettier/prettier": [
+      "error",
+      {
+        "usePrittierrc": true
+      }
+    ]
   }
 }
