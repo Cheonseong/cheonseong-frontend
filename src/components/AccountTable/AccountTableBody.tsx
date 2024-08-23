@@ -204,11 +204,10 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
             </td>
             <td className="border border-gray-300 px-4 py-2">
               {isInEditMode(index) ? (
-                <input
-                  type="text"
+                <textarea
                   value={record.detail || ''}
                   onChange={(e) => handleInputChange(index, 'detail', e.target.value)}
-                  className="w-full rounded border border-gray-300 px-2 py-1"
+                  className="size-full min-h-[80px] resize-none rounded border border-gray-300 px-2 py-1"
                   placeholder="비고"
                 />
               ) : (
