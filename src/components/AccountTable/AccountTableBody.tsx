@@ -115,12 +115,12 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
                 <div className="flex flex-col items-center">
                   <button
                     onClick={() => incrementDay(index)}
-                    className="border-b-6 mb-1 size-5 border-x-4 border-x-transparent border-b-black"
+                    className="mb-3 size-0 border-x-[7px] border-b-[10px] border-x-transparent border-b-gray-700"
                   ></button>
                   <p>{getLocaleString(record.accountDate)}</p>
                   <button
                     onClick={() => decrementDay(index)}
-                    className="border-t-6 mt-1 size-5 border-x-4 border-x-transparent border-t-black"
+                    className="mt-3 size-0 border-x-[7px] border-t-[10px] border-x-transparent border-t-gray-700"
                   ></button>
                 </div>
               ) : (
@@ -171,7 +171,7 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
                 <div className="flex flex-col items-center">
                   <button
                     onClick={() => incrementAmount(index)}
-                    className="border-b-6 mb-1 size-5 border-x-4 border-x-transparent border-b-black"
+                    className="mb-3 size-0 border-x-[7px] border-b-[10px] border-x-transparent border-b-gray-700"
                   ></button>
                   <input
                     type="number"
@@ -182,7 +182,7 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
                   <p className="text-sm">{`${toKoreanPronunciation(record.amount)} 원`}</p>
                   <button
                     onClick={() => decrementAmount(index)}
-                    className="border-t-6 mt-1 size-5 border-x-4 border-x-transparent border-t-black"
+                    className="mt-3 size-0 border-x-[7px] border-t-[10px] border-x-transparent border-t-gray-700"
                   ></button>
                 </div>
               ) : (
