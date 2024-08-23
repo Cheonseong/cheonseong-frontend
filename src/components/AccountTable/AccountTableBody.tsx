@@ -45,11 +45,15 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
   };
 
   const handleDeleteRowButton = (index: number) => {
+    const confirmed = confirm('정말 삭제하시겠습니까?');
+    if (!confirmed) return;
+
     const updatedData = accountData.filter((_, i) => i !== index);
     setAccountData(updatedData);
     if (editModeIndex === index) {
-      setEditModeIndex(null);
+      //
     }
+    setEditModeIndex(null);
   };
 
   const incrementDay = (index: number) => {
@@ -88,10 +92,11 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
         <tr className="bg-gray-200">
           <th className="w-1/14 border border-gray-300 px-4 py-2">#</th>
           <th className="w-2/14 border border-gray-300 px-4 py-2">날짜</th>
+          <th className="w-5/14 border border-gray-300 px-4 py-2">분류</th>
           <th className="w-2/14 border border-gray-300 px-4 py-2">수입/지출</th>
           <th className="w-1/14 border border-gray-300 px-4 py-2">금액</th>
           <th className="w-2/14 border border-gray-300 px-4 py-2">이름</th>
-          <th className="w-5/14 border border-gray-300 px-4 py-2">비고</th>
+          <th className="w-3/14 border border-gray-300 px-4 py-2">비고</th>
           <th className="w-1/14 border border-gray-300 px-4 py-2"></th>
         </tr>
       </thead>
@@ -124,6 +129,19 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
             </td>
             <td className="border border-gray-300 px-4 py-2">
               {isInEditMode(index) ? (
+                <input
+                  type="text"
+                  value={record.categoryName}
+                  onChange={(e) => handleInputChange(index, 'categoryName', e.target.value)}
+                  className="w-24 rounded border border-gray-300 px-2 py-1"
+                  placeholder="분류"
+                />
+              ) : (
+                record.categoryName
+              )}
+            </td>
+            <td className="border border-gray-300 px-4 py-2">
+              {isInEditMode(index) ? (
                 <div className="flex justify-center">
                   <button
                     onClick={() => handleTypeChange(index, '수입')}
@@ -143,7 +161,9 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
                   </button>
                 </div>
               ) : (
-                record.inoutType
+                <p className={`font-semibold ${record.inoutType === '수입' ? 'text-green-500' : 'text-red-500'}`}>
+                  {record.inoutType}
+                </p>
               )}
             </td>
             <td className="border border-gray-300 px-4 py-2">
@@ -202,7 +222,7 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
                 </button>
               ) : (
                 <button onClick={() => handleDeleteRowButton(index)} className="text-red-500 hover:text-red-700">
-                  🗑️
+                  🗑
                 </button>
               )}
             </td>
