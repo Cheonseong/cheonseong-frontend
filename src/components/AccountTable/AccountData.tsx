@@ -1,48 +1,58 @@
+import { INOUT_TYPE } from './constant';
+
 interface AccountRecord {
-  date: Date;
-  type: '수입' | '지출';
+  accountDate: Date;
+  inoutType: keyof typeof INOUT_TYPE;
   amount: number;
-  name: string;
-  remarks?: string;
+  userName: string;
+  detail?: string;
 }
 
 const initialAccountSampleData: AccountRecord[] = [
   {
-    date: new Date('2024-01-01'),
-    type: '수입',
+    accountDate: new Date('2024-01-01'),
+    inoutType: '수입',
     amount: 500000,
-    name: 'Salary',
-    remarks: 'Monthly salary',
+    userName: '이예찬',
+    detail: 'Monthly salary',
   },
   {
-    date: new Date('2024-01-15'),
-    type: '수입',
+    accountDate: new Date('2024-01-15'),
+    inoutType: '수입',
     amount: 200000,
-    name: 'Freelance',
-    remarks: 'Project A',
+    userName: '김예찬',
+    detail: 'Project A',
   },
   {
-    date: new Date('2024-01-20'),
-    type: '지출',
+    accountDate: new Date('2024-01-20'),
+    inoutType: '지출',
     amount: 150000,
-    name: 'Groceries',
-    remarks: 'Supermarket',
+    userName: '최예찬',
+    detail: '',
   },
   {
-    date: new Date('2024-01-22'),
-    type: '지출',
+    accountDate: new Date('2024-01-22'),
+    inoutType: '지출',
     amount: 50000,
-    name: 'Transport',
-    remarks: 'Bus and subway',
+    userName: '박예찬',
+    detail: 'Bus and subway',
   },
   {
-    date: new Date('2024-01-25'),
-    type: '지출',
+    accountDate: new Date('2024-01-25'),
+    inoutType: '지출',
     amount: 100000,
-    name: 'Entertainment',
-    remarks: 'Movie and dinner',
+    userName: '정예찬',
+    detail: '',
   },
 ];
 
+const loadPreviousAccountData = () => {
+  console.log('Loading previous account data...');
+};
+
+const loadNextAccountData = () => {
+  console.log('Loading next account data...');
+};
+
 export type { AccountRecord };
-export { initialAccountSampleData };
+export { initialAccountSampleData, loadPreviousAccountData, loadNextAccountData };

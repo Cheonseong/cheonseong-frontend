@@ -1,23 +1,15 @@
-import { AccountRecord } from './AccountData';
+import { AccountRecord, loadNextAccountData, loadPreviousAccountData } from './AccountData';
 
 interface AccountTableHeaderProps {
   accountData: AccountRecord[];
 }
 
 const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
-  const loadPreviousData = () => {
-    console.log('Loading previous account data...');
-  };
-
-  const loadNextData = () => {
-    console.log('Loading next account data...');
-  };
-
   const totalIncome = accountData
-    .filter((record) => record.type === '수입')
+    .filter((record) => record.inoutType === '수입')
     .reduce((sum, record) => sum + record.amount, 0);
   const totalOutcome = accountData
-    .filter((record) => record.type === '지출')
+    .filter((record) => record.inoutType === '지출')
     .reduce((sum, record) => sum + record.amount, 0);
   const totalAmount = totalIncome - totalOutcome;
 
@@ -28,7 +20,7 @@ const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
 
   return (
     <div className="relative mb-4">
-      <button onClick={loadPreviousData} className="absolute left-0 top-1/2 -translate-y-1/2 px-4 py-2">
+      <button onClick={loadPreviousAccountData} className="absolute left-0 top-1/2 -translate-y-1/2 px-4 py-2">
         <div className="size-0 border-y-8 border-r-8 border-y-transparent border-r-black"></div>
       </button>
       <div className="rounded-lg bg-white p-6 shadow-lg">
@@ -47,7 +39,7 @@ const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
           </div>
         </div>
       </div>
-      <button onClick={loadNextData} className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2">
+      <button onClick={loadNextAccountData} className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2">
         <div className="size-0 border-y-8 border-l-8 border-y-transparent border-l-black"></div>
       </button>
     </div>

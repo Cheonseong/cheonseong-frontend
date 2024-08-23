@@ -1,5 +1,8 @@
 import React from 'react';
 import { AccountRecord } from './AccountData';
+import { INOUT_TYPE } from './constant';
+import { getLocaleString } from '../../utils/date';
+import { toKoreanPronunciation } from '../../utils/currency';
 
 interface AccountTableBodyProps {
   accountData: AccountRecord[];
@@ -8,16 +11,11 @@ interface AccountTableBodyProps {
   setEditModeIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const AccountTableBody = ({
-  accountData,
-  setAccountData,
-  editModeIndex: editableIndex,
-  setEditModeIndex: setEditModeIndex,
-}: AccountTableBodyProps) => {
+const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditModeIndex }: AccountTableBodyProps) => {
   const handleRowClick = (index: number) => {
-    if (editableIndex === null) {
+    if (editModeIndex === null) {
       setEditModeIndex(index);
-    } else if (editableIndex !== index) {
+    } else if (editModeIndex !== index) {
       setEditModeIndex(index);
     }
   };
@@ -26,10 +24,10 @@ const AccountTableBody = ({
     const updatedData = [...accountData];
     if (field === 'amount') {
       updatedData[index].amount = Number(value);
-    } else if (field === 'date') {
-      updatedData[index].date = value as Date;
-    } else if (field === 'type') {
-      updatedData[index][field] = value as '수입' | '지출';
+    } else if (field === 'accountDate') {
+      updatedData[index].accountDate = value as Date;
+    } else if (field === 'inoutType') {
+      updatedData[index][field] = value as keyof typeof INOUT_TYPE;
     } else {
       updatedData[index][field] = value as string;
     }
@@ -38,31 +36,31 @@ const AccountTableBody = ({
 
   const handleTypeChange = (index: number, type: '수입' | '지출') => {
     const updatedData = [...accountData];
-    updatedData[index].type = type;
+    updatedData[index].inoutType = type;
     setAccountData(updatedData);
   };
 
-  const handleEditConfirm = () => {
+  const handleEditConfirmButton = () => {
     setEditModeIndex(null);
   };
 
-  const handleDeleteRow = (index: number) => {
+  const handleDeleteRowButton = (index: number) => {
     const updatedData = accountData.filter((_, i) => i !== index);
     setAccountData(updatedData);
-    if (editableIndex === index) {
+    if (editModeIndex === index) {
       setEditModeIndex(null);
     }
   };
 
   const incrementDay = (index: number) => {
     const updatedData = [...accountData];
-    updatedData[index].date.setDate(updatedData[index].date.getDate() + 1);
+    updatedData[index].accountDate.setDate(updatedData[index].accountDate.getDate() + 1);
     setAccountData(updatedData);
   };
 
   const decrementDay = (index: number) => {
     const updatedData = [...accountData];
-    updatedData[index].date.setDate(updatedData[index].date.getDate() - 1);
+    updatedData[index].accountDate.setDate(updatedData[index].accountDate.getDate() - 1);
     setAccountData(updatedData);
   };
 
@@ -80,6 +78,10 @@ const AccountTableBody = ({
     }
   };
 
+  const isInEditMode = (index: number) => {
+    return editModeIndex === index;
+  };
+
   return (
     <table className="w-full table-auto border-collapse border border-gray-300">
       <thead>
@@ -87,10 +89,10 @@ const AccountTableBody = ({
           <th className="w-1/14 border border-gray-300 px-4 py-2">#</th>
           <th className="w-2/14 border border-gray-300 px-4 py-2">날짜</th>
           <th className="w-2/14 border border-gray-300 px-4 py-2">수입/지출</th>
-          <th className="w-2/14 border border-gray-300 px-4 py-2">금액</th>
-          <th className="w-4/14 border border-gray-300 px-4 py-2">이름</th>
-          <th className="w-2/14 border border-gray-300 px-4 py-2">비고</th>
-          <th className="w-1/14 border border-gray-300 px-4 py-2">작업</th>
+          <th className="w-1/14 border border-gray-300 px-4 py-2">금액</th>
+          <th className="w-2/14 border border-gray-300 px-4 py-2">이름</th>
+          <th className="w-5/14 border border-gray-300 px-4 py-2">비고</th>
+          <th className="w-1/14 border border-gray-300 px-4 py-2"></th>
         </tr>
       </thead>
       <tbody>
@@ -98,37 +100,35 @@ const AccountTableBody = ({
           <tr
             key={index}
             className={`text-center transition-all duration-200 ${
-              editableIndex === index ? 'h-16 bg-gray-100' : 'h-12'
+              editModeIndex === index ? 'h-16 bg-gray-100' : 'h-12'
             } hover:bg-gray-100`}
             onClick={() => handleRowClick(index)}
           >
             <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
             <td className="border border-gray-300 px-4 py-2">
-              {editableIndex === index ? (
+              {isInEditMode(index) ? (
                 <div className="flex flex-col items-center">
                   <button
-                    onClick={() => decrementDay(index)}
-                    className="border-b-6 mb-1 size-0 border-x-4 border-x-transparent border-b-black"
-                  ></button>
-                  <p>{`${record.date.getMonth() + 1}월 ${record.date.getDate()}일 ${
-                    ['일', '월', '화', '수', '목', '금', '토'][record.date.getDay()]
-                  }`}</p>
-                  <button
                     onClick={() => incrementDay(index)}
-                    className="border-t-6 mt-1 size-0 border-x-4 border-x-transparent border-t-black"
+                    className="border-b-6 mb-1 size-5 border-x-4 border-x-transparent border-b-black"
+                  ></button>
+                  <p>{getLocaleString(record.accountDate)}</p>
+                  <button
+                    onClick={() => decrementDay(index)}
+                    className="border-t-6 mt-1 size-5 border-x-4 border-x-transparent border-t-black"
                   ></button>
                 </div>
               ) : (
-                `${record.date.getMonth() + 1}/${record.date.getDate()}`
+                <p>{getLocaleString(record.accountDate)}</p>
               )}
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {editableIndex === index ? (
+              {isInEditMode(index) ? (
                 <div className="flex justify-center">
                   <button
                     onClick={() => handleTypeChange(index, '수입')}
                     className={`rounded px-4 py-1 ${
-                      record.type === '수입' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'
+                      record.inoutType === '수입' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'
                     }`}
                   >
                     수입
@@ -136,71 +136,72 @@ const AccountTableBody = ({
                   <button
                     onClick={() => handleTypeChange(index, '지출')}
                     className={`rounded px-4 py-1 ${
-                      record.type === '지출' ? 'bg-red-500 text-white' : 'bg-gray-200 text-black'
+                      record.inoutType === '지출' ? 'bg-red-500 text-white' : 'bg-gray-200 text-black'
                     }`}
                   >
                     지출
                   </button>
                 </div>
               ) : (
-                record.type
+                record.inoutType
               )}
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {editableIndex === index ? (
+              {isInEditMode(index) ? (
                 <div className="flex flex-col items-center">
                   <button
-                    onClick={() => decrementAmount(index)}
-                    className="border-b-6 mb-1 size-0 border-x-4 border-x-transparent border-b-black"
+                    onClick={() => incrementAmount(index)}
+                    className="border-b-6 mb-1 size-5 border-x-4 border-x-transparent border-b-black"
                   ></button>
                   <input
                     type="number"
                     value={record.amount}
                     onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
-                    className="w-full rounded border border-gray-300 px-2 py-1 text-center"
-                  />
+                    className="w-32 rounded border border-gray-300 px-2 py-1 text-center"
+                  />{' '}
+                  <p className="text-sm">{`${toKoreanPronunciation(record.amount)} 원`}</p>
                   <button
-                    onClick={() => incrementAmount(index)}
-                    className="border-t-6 mt-1 size-0 border-x-4 border-x-transparent border-t-black"
+                    onClick={() => decrementAmount(index)}
+                    className="border-t-6 mt-1 size-5 border-x-4 border-x-transparent border-t-black"
                   ></button>
                 </div>
               ) : (
-                record.amount.toLocaleString()
+                `${record.amount.toLocaleString()} 원`
               )}
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {editableIndex === index ? (
+              {isInEditMode(index) ? (
                 <input
                   type="text"
-                  value={record.name}
-                  onChange={(e) => handleInputChange(index, 'name', e.target.value)}
-                  className="w-full rounded border border-gray-300 px-2 py-1"
+                  value={record.userName}
+                  onChange={(e) => handleInputChange(index, 'userName', e.target.value)}
+                  className="w-24 rounded border border-gray-300 px-2 py-1"
                   placeholder="이름"
                 />
               ) : (
-                record.name
+                record.userName
               )}
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {editableIndex === index ? (
+              {isInEditMode(index) ? (
                 <input
                   type="text"
-                  value={record.remarks || ''}
-                  onChange={(e) => handleInputChange(index, 'remarks', e.target.value)}
+                  value={record.detail || ''}
+                  onChange={(e) => handleInputChange(index, 'detail', e.target.value)}
                   className="w-full rounded border border-gray-300 px-2 py-1"
                   placeholder="비고"
                 />
               ) : (
-                record.remarks || '-'
+                record.detail || '-'
               )}
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {editableIndex === index ? (
-                <button onClick={handleEditConfirm} className="text-green-500 hover:text-green-700">
+              {isInEditMode(index) ? (
+                <button onClick={handleEditConfirmButton} className="text-green-500 hover:text-green-700">
                   ✔️
                 </button>
               ) : (
-                <button onClick={() => handleDeleteRow(index)} className="text-red-500 hover:text-red-700">
+                <button onClick={() => handleDeleteRowButton(index)} className="text-red-500 hover:text-red-700">
                   🗑️
                 </button>
               )}
