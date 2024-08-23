@@ -10,7 +10,9 @@ const AccountTableFooter = ({ accountData, setAccountData, setEditModeIndex }: A
   const addRow = () => {
     const lastRecord = accountData[accountData.length - 1];
     const newRecord: AccountRecord = {
+      accountId: undefined,
       accountDate: new Date(lastRecord.accountDate),
+      categoryName: lastRecord.categoryName,
       inoutType: lastRecord.inoutType,
       amount: lastRecord.amount,
       userName: '',

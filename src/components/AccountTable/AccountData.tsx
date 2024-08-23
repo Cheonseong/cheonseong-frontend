@@ -1,7 +1,7 @@
 import { INOUT_TYPE } from './constant';
 
 interface AccountRecord {
-  accountId: string;
+  accountId: string | undefined;
   accountDate: Date;
   categoryName: string;
   inoutType: keyof typeof INOUT_TYPE;
