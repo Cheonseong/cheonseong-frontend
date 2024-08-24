@@ -10,7 +10,7 @@ const AccountTable: React.FC = () => {
 
   return (
     <div className="container mx-auto mt-8 px-10">
-      <AccountTableHeader accountData={accountData} />;
+      <AccountTableHeader accountData={accountData} />
       <AccountTableBody
         accountData={accountData}
         setAccountData={setAccountData}

@@ -4,7 +4,6 @@ interface ButtonColumnProps {
   index: number;
   accountData: AccountRecord[];
   setAccountData: React.Dispatch<React.SetStateAction<AccountRecord[]>>;
-  editModeIndex: number | null;
   setEditModeIndex: React.Dispatch<React.SetStateAction<number | null>>;
   isInEditMode: boolean;
 }
@@ -13,7 +12,6 @@ const ButtonColumn = ({
   index,
   accountData,
   setAccountData,
-  editModeIndex,
   setEditModeIndex,
   isInEditMode,
 }: ButtonColumnProps) => {
@@ -37,7 +35,10 @@ const ButtonColumn = ({
           ✔️
         </button>
       ) : (
-        <button onClick={() => handleDeleteRowButton(index)} className="text-red-500 hover:text-red-700">
+        <button
+          onClick={() => handleDeleteRowButton(index)}
+          className="text-red-500 hover:text-red-700"
+        >
           🗑
         </button>
       )}

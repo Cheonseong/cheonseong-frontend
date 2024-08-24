@@ -7,6 +7,7 @@ import AmountColumn from './column/AmountColumn';
 import UserNameColumn from './column/UserNameColumn';
 import DetailColumn from './column/DetailColumn';
 import ButtonColumn from './column/ButtonColumn';
+import CategoryNameColumn from './column/CategoryNameColumn';
 
 interface AccountTableBodyProps {
   accountData: AccountRecord[];
@@ -15,7 +16,12 @@ interface AccountTableBodyProps {
   setEditModeIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditModeIndex }: AccountTableBodyProps) => {
+const AccountTableBody = ({
+  accountData,
+  setAccountData,
+  editModeIndex,
+  setEditModeIndex,
+}: AccountTableBodyProps) => {
   const handleRowClick = (index: number) => {
     if (editModeIndex === null) {
       setEditModeIndex(index);
@@ -47,7 +53,7 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
           <tr
             key={index}
             className={`text-center transition-all duration-200 ${
-              editModeIndex === index ? 'h-16 bg-gray-100' : 'h-12'
+              isInEditMode(index) ? 'h-16 bg-gray-100' : 'h-12'
             } hover:bg-gray-100`}
             onClick={() => handleRowClick(index)}
           >
@@ -59,19 +65,13 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
               setAccountData={setAccountData}
               isInEditMode={isInEditMode(index)}
             />
-            <td className="border border-gray-300 px-4 py-2">
-              {/* {isInEditMode(index) ? (
-                <input
-                  type="text"
-                  value={record.categoryName}
-                  onChange={(e) => handleInputChange(index, 'categoryName', e.target.value)}
-                  className="w-24 rounded border border-gray-300 px-2 py-1"
-                  placeholder="분류"
-                />
-              ) : (
-                record.categoryName
-              )} */}
-            </td>
+            <CategoryNameColumn
+              index={index}
+              record={record}
+              accountData={accountData}
+              setAccountData={setAccountData}
+              isInEditMode={isInEditMode(index)}
+            />
             <InoutTypeColumn
               index={index}
               record={record}
@@ -104,7 +104,6 @@ const AccountTableBody = ({ accountData, setAccountData, editModeIndex, setEditM
               index={index}
               accountData={accountData}
               setAccountData={setAccountData}
-              editModeIndex={editModeIndex}
               setEditModeIndex={setEditModeIndex}
               isInEditMode={isInEditMode(index)}
             />

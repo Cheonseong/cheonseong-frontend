@@ -8,10 +8,16 @@ interface UserNameColumnProps {
   isInEditMode: boolean;
 }
 
-const UserNameColumn = ({ index, record, accountData, setAccountData, isInEditMode }: UserNameColumnProps) => {
-  const handleInputChange = (index: number, field: keyof AccountRecord, value: string) => {
+const UserNameColumn = ({
+  index,
+  record,
+  accountData,
+  setAccountData,
+  isInEditMode,
+}: UserNameColumnProps) => {
+  const handleInputChange = (index: number, value: string) => {
     const updatedData = [...accountData];
-    updatedData[index][field] = value;
+    updatedData[index].userName = value;
     setAccountData(updatedData);
   };
 
@@ -21,7 +27,7 @@ const UserNameColumn = ({ index, record, accountData, setAccountData, isInEditMo
         <input
           type="text"
           value={record.userName}
-          onChange={(e) => handleInputChange(index, 'userName', e.target.value)}
+          onChange={(e) => handleInputChange(index, e.target.value)}
           className="w-24 rounded border border-gray-300 px-2 py-1"
           placeholder="이름"
         />

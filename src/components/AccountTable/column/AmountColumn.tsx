@@ -9,8 +9,14 @@ interface AmountColumnProps {
   isInEditMode: boolean;
 }
 
-const AmountColumn = ({ index, record, accountData, setAccountData, isInEditMode }: AmountColumnProps) => {
-  const handleInputChange = (index: number, field: keyof AccountRecord, value: string | number | Date) => {
+const AmountColumn = ({
+  index,
+  record,
+  accountData,
+  setAccountData,
+  isInEditMode,
+}: AmountColumnProps) => {
+  const handleInputChange = (index: number, value: string | number | Date) => {
     const updatedData = [...accountData];
     updatedData[index].amount = Number(value);
     setAccountData(updatedData);
@@ -41,7 +47,7 @@ const AmountColumn = ({ index, record, accountData, setAccountData, isInEditMode
           <input
             type="number"
             value={record.amount}
-            onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
+            onChange={(e) => handleInputChange(index, e.target.value)}
             className="w-32 rounded border border-gray-300 px-2 py-1 text-center"
           />{' '}
           <p className="text-sm">{`${toKoreanPronunciation(record.amount)} 원`}</p>

@@ -19,8 +19,11 @@ const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
   const week = Math.ceil(now.getDate() / 7);
 
   return (
-    <div className="relative mb-4">
-      <button onClick={loadPreviousAccountData} className="absolute left-0 top-1/2 -translate-y-1/2 px-4 py-2">
+    <div className="relative mb-12">
+      <button
+        onClick={loadPreviousAccountData}
+        className="absolute left-0 top-1/2 -translate-y-1/2 px-4 py-2"
+      >
         <div className="size-0 border-y-8 border-r-8 border-y-transparent border-r-black"></div>
       </button>
       <div className="rounded-lg bg-white p-6 shadow-lg">
@@ -32,14 +35,19 @@ const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
           </div>
           <div className="mr-4 text-left">
             <p className="text-gray-700">수입계</p>
-            <p className="text-xl font-semibold text-green-600">{totalIncome.toLocaleString()} 원</p>
+            <p className="text-xl font-semibold text-green-600">
+              {totalIncome.toLocaleString()} 원
+            </p>
             <div className="my-2" />
             <p className="text-gray-700">지출계</p>
             <p className="text-xl font-semibold text-red-600">{totalOutcome.toLocaleString()} 원</p>
           </div>
         </div>
       </div>
-      <button onClick={loadNextAccountData} className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2">
+      <button
+        onClick={loadNextAccountData}
+        className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2"
+      >
         <div className="size-0 border-y-8 border-l-8 border-y-transparent border-l-black"></div>
       </button>
     </div>

@@ -8,10 +8,16 @@ interface DetailColumnProps {
   isInEditMode: boolean;
 }
 
-const DetailColumn = ({ index, record, accountData, setAccountData, isInEditMode }: DetailColumnProps) => {
-  const handleInputChange = (index: number, field: keyof AccountRecord, value: string) => {
+const DetailColumn = ({
+  index,
+  record,
+  accountData,
+  setAccountData,
+  isInEditMode,
+}: DetailColumnProps) => {
+  const handleInputChange = (index: number, value: string) => {
     const updatedData = [...accountData];
-    updatedData[index][field] = value as string;
+    updatedData[index].detail = value;
     setAccountData(updatedData);
   };
 
@@ -20,7 +26,7 @@ const DetailColumn = ({ index, record, accountData, setAccountData, isInEditMode
       {isInEditMode ? (
         <textarea
           value={record.detail || ''}
-          onChange={(e) => handleInputChange(index, 'detail', e.target.value)}
+          onChange={(e) => handleInputChange(index, e.target.value)}
           className="size-full min-h-[80px] resize-none rounded border border-gray-300 px-2 py-1"
           placeholder="비고"
         />

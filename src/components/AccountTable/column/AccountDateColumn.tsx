@@ -9,7 +9,13 @@ interface AccountDateColumnProps {
   isInEditMode: boolean;
 }
 
-const AccountDateColumn = ({ index, record, accountData, setAccountData, isInEditMode }: AccountDateColumnProps) => {
+const AccountDateColumn = ({
+  index,
+  record,
+  accountData,
+  setAccountData,
+  isInEditMode,
+}: AccountDateColumnProps) => {
   const incrementDay = (index: number) => {
     const updatedData = [...accountData];
     updatedData[index].accountDate.setDate(updatedData[index].accountDate.getDate() + 1);

@@ -8,7 +8,13 @@ interface InoutTypeColumnProps {
   isInEditMode: boolean;
 }
 
-const InoutTypeColumn = ({ index, record, accountData, setAccountData, isInEditMode }: InoutTypeColumnProps) => {
+const InoutTypeColumn = ({
+  index,
+  record,
+  accountData,
+  setAccountData,
+  isInEditMode,
+}: InoutTypeColumnProps) => {
   const handleTypeChange = (index: number, type: '수입' | '지출') => {
     const updatedData = [...accountData];
     updatedData[index].inoutType = type;
@@ -37,7 +43,11 @@ const InoutTypeColumn = ({ index, record, accountData, setAccountData, isInEditM
           </button>
         </div>
       ) : (
-        <p className={`font-semibold ${record.inoutType === '수입' ? 'text-green-500' : 'text-red-500'}`}>
+        <p
+          className={`font-semibold ${
+            record.inoutType === '수입' ? 'text-green-500' : 'text-red-500'
+          }`}
+        >
           {record.inoutType}
         </p>
       )}
