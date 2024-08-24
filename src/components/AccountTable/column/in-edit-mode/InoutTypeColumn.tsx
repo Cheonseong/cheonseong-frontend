@@ -1,20 +1,18 @@
-import { AccountRecord } from '../AccountData';
+import { AccountRecord } from '../../AccountData';
 
-interface InoutTypeColumnProps {
+interface InoutTypeColumnInEditModeProps {
   index: number;
   record: AccountRecord;
   accountData: AccountRecord[];
   setAccountData: React.Dispatch<React.SetStateAction<AccountRecord[]>>;
-  isInEditMode: boolean;
 }
 
-const InoutTypeColumn = ({
+const InoutTypeColumnInEditMode = ({
   index,
   record,
   accountData,
   setAccountData,
-  isInEditMode,
-}: InoutTypeColumnProps) => {
+}: InoutTypeColumnInEditModeProps) => {
   const handleTypeChange = (index: number, type: '수입' | '지출') => {
     const updatedData = [...accountData];
     updatedData[index].inoutType = type;
@@ -23,7 +21,7 @@ const InoutTypeColumn = ({
 
   return (
     <td className="border border-gray-300 px-4 py-2">
-      {isInEditMode ? (
+      {
         <div className="flex justify-center">
           <button
             onClick={() => handleTypeChange(index, '수입')}
@@ -42,17 +40,9 @@ const InoutTypeColumn = ({
             지출
           </button>
         </div>
-      ) : (
-        <p
-          className={`font-semibold ${
-            record.inoutType === '수입' ? 'text-green-500' : 'text-red-500'
-          }`}
-        >
-          {record.inoutType}
-        </p>
-      )}
+      }
     </td>
   );
 };
 
-export default InoutTypeColumn;
+export default InoutTypeColumnInEditMode;

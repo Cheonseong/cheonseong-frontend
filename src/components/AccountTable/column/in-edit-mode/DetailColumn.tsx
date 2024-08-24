@@ -1,41 +1,36 @@
-import { AccountRecord } from '../AccountData';
+import { AccountRecord } from '../../AccountData';
 
-interface UserNameColumnProps {
+interface DetailColumnInEditModeProps {
   index: number;
   record: AccountRecord;
   accountData: AccountRecord[];
   setAccountData: React.Dispatch<React.SetStateAction<AccountRecord[]>>;
-  isInEditMode: boolean;
 }
 
-const UserNameColumn = ({
+const DetailColumnInEditMode = ({
   index,
   record,
   accountData,
   setAccountData,
-  isInEditMode,
-}: UserNameColumnProps) => {
+}: DetailColumnInEditModeProps) => {
   const handleInputChange = (index: number, value: string) => {
     const updatedData = [...accountData];
-    updatedData[index].userName = value;
+    updatedData[index].detail = value;
     setAccountData(updatedData);
   };
 
   return (
     <td className="border border-gray-300 px-4 py-2">
-      {isInEditMode ? (
-        <input
-          type="text"
-          value={record.userName}
+      {
+        <textarea
+          value={record.detail || ''}
           onChange={(e) => handleInputChange(index, e.target.value)}
-          className="w-24 rounded border border-gray-300 px-2 py-1"
-          placeholder="이름"
+          className="size-full min-h-[80px] resize-none rounded border border-gray-300 px-2 py-1"
+          placeholder="비고"
         />
-      ) : (
-        record.userName
-      )}
+      }
     </td>
   );
 };
 
-export default UserNameColumn;
+export default DetailColumnInEditMode;

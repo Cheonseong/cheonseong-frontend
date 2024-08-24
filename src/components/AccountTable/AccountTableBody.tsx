@@ -1,13 +1,20 @@
 import React from 'react';
 import { AccountRecord } from './AccountData';
 import IndexColumn from './column/IndexColumn';
-import AccountDateColumn from './column/AccountDateColumn';
-import InoutTypeColumn from './column/InoutTypeColumn';
-import AmountColumn from './column/AmountColumn';
-import UserNameColumn from './column/UserNameColumn';
-import DetailColumn from './column/DetailColumn';
-import ButtonColumn from './column/ButtonColumn';
-import CategoryNameColumn from './column/CategoryNameColumn';
+import AccountDateColumn from './column/in-normal-mode/AccountDateColumn';
+import InoutTypeColumn from './column/in-normal-mode/InoutTypeColumn';
+import AmountColumn from './column/in-normal-mode/AmountColumn';
+import UserNameColumn from './column/in-normal-mode/UserNameColumn';
+import DetailColumn from './column/in-normal-mode/DetailColumn';
+import ButtonColumn from './column/in-normal-mode/ButtonColumn';
+import CategoryNameColumn from './column/in-normal-mode/CategoryNameColumn';
+import AccountDateColumnInEditMode from './column/in-edit-mode/AccountDateColumn';
+import CategoryNameColumnInEditMode from './column/in-edit-mode/CategoryNameColumn';
+import InoutTypeColumnInEditMode from './column/in-edit-mode/InoutTypeColumn';
+import AmountColumnInEditMode from './column/in-edit-mode/AmountColumn';
+import UserNameColumnInEditMode from './column/in-edit-mode/UserNameColumn';
+import DetailColumnInEditMode from './column/in-edit-mode/DetailColumn';
+import ButtonColumnInEditMode from './column/in-edit-mode/ButtonColumn';
 
 interface AccountTableBodyProps {
   accountData: AccountRecord[];
@@ -58,55 +65,62 @@ const AccountTableBody = ({
             onClick={() => handleRowClick(index)}
           >
             <IndexColumn index={index} />
-            <AccountDateColumn
-              index={index}
-              record={record}
-              accountData={accountData}
-              setAccountData={setAccountData}
-              isInEditMode={isInEditMode(index)}
-            />
-            <CategoryNameColumn
-              index={index}
-              record={record}
-              accountData={accountData}
-              setAccountData={setAccountData}
-              isInEditMode={isInEditMode(index)}
-            />
-            <InoutTypeColumn
-              index={index}
-              record={record}
-              accountData={accountData}
-              setAccountData={setAccountData}
-              isInEditMode={isInEditMode(index)}
-            />
-            <AmountColumn
-              index={index}
-              record={record}
-              accountData={accountData}
-              setAccountData={setAccountData}
-              isInEditMode={isInEditMode(index)}
-            />
-            <UserNameColumn
-              index={index}
-              record={record}
-              accountData={accountData}
-              setAccountData={setAccountData}
-              isInEditMode={isInEditMode(index)}
-            />
-            <DetailColumn
-              index={index}
-              record={record}
-              accountData={accountData}
-              setAccountData={setAccountData}
-              isInEditMode={isInEditMode(index)}
-            />
-            <ButtonColumn
-              index={index}
-              accountData={accountData}
-              setAccountData={setAccountData}
-              setEditModeIndex={setEditModeIndex}
-              isInEditMode={isInEditMode(index)}
-            />
+            {!isInEditMode(index) ? (
+              <>
+                <AccountDateColumn record={record} />
+                <CategoryNameColumn record={record} />
+                <InoutTypeColumn record={record} />
+                <AmountColumn record={record} />
+                <UserNameColumn record={record} />
+                <DetailColumn record={record} />
+                <ButtonColumn
+                  index={index}
+                  accountData={accountData}
+                  setAccountData={setAccountData}
+                  setEditModeIndex={setEditModeIndex}
+                />
+              </>
+            ) : (
+              <>
+                <AccountDateColumnInEditMode
+                  index={index}
+                  record={record}
+                  accountData={accountData}
+                  setAccountData={setAccountData}
+                />
+                <CategoryNameColumnInEditMode
+                  index={index}
+                  record={record}
+                  accountData={accountData}
+                  setAccountData={setAccountData}
+                />
+                <InoutTypeColumnInEditMode
+                  index={index}
+                  record={record}
+                  accountData={accountData}
+                  setAccountData={setAccountData}
+                />
+                <AmountColumnInEditMode
+                  index={index}
+                  record={record}
+                  accountData={accountData}
+                  setAccountData={setAccountData}
+                />
+                <UserNameColumnInEditMode
+                  index={index}
+                  record={record}
+                  accountData={accountData}
+                  setAccountData={setAccountData}
+                />
+                <DetailColumnInEditMode
+                  index={index}
+                  record={record}
+                  accountData={accountData}
+                  setAccountData={setAccountData}
+                />
+                <ButtonColumnInEditMode setEditModeIndex={setEditModeIndex} />
+              </>
+            )}
           </tr>
         ))}
       </tbody>
