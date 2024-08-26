@@ -1,3 +1,4 @@
+import { FocusEvent } from 'react';
 import { AccountRecord } from '../../AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
 
@@ -20,12 +21,17 @@ const CategoryNameColumnInEditMode = ({
     setAccountData(updatedData);
   };
 
+  const handleFocus = (e: FocusEvent<HTMLInputElement>): void => {
+    e.target.select();
+  };
+
   return (
     <td className={accountTableCellStyle}>
       <input
         type="text"
         value={record.categoryName}
         onChange={(e) => handleInputChange(index, e.target.value)}
+        onFocus={handleFocus}
         className="w-24 rounded border border-gray-300 px-2 py-1"
         placeholder="분류"
       />

@@ -1,3 +1,4 @@
+import { FocusEvent } from 'react';
 import { toKoreanPronunciation } from '../../../../utils/currency';
 import { AccountRecord } from '../../AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
@@ -35,6 +36,10 @@ const AmountColumnInEditMode = ({
     }
   };
 
+  const handleFocus = (e: FocusEvent<HTMLInputElement>): void => {
+    e.target.select();
+  };
+
   return (
     <td className={accountTableCellStyle}>
       <div className="flex flex-col items-center">
@@ -46,6 +51,7 @@ const AmountColumnInEditMode = ({
           type="number"
           value={record.amount}
           onChange={(e) => handleInputChange(index, e.target.value)}
+          onFocus={handleFocus}
           className="w-32 rounded border border-gray-300 px-2 py-1 text-center"
         />{' '}
         <p className="text-sm">{`${toKoreanPronunciation(record.amount)} 원`}</p>
