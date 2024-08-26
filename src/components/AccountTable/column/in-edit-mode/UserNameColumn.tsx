@@ -28,6 +28,7 @@ const UserNameColumnInEditMode = ({
         inputOnChange={(value) => handleInputChange(index, value)}
         inputPlaceholder="이름"
         inputWidth={32}
+        addNewRecordFn={(value) => console.log(`사용자 ${value}을(를) 등록합니다.`)}
         data={userSampleData}
       />
     </td>
