@@ -156,6 +156,19 @@ const AutoCompletionInput = ({
               )}
             </li>
           ))}
+          {filteredUsers.length === 0 ? (
+            <li
+              key={filteredUsers.length + 1}
+              className={`cursor-pointer items-center justify-between bg-sky-100 p-2 text-left`}
+              onClick={() => {}}
+            >
+              <span className="break-keep">{inputValue}</span>
+              <br />
+              <p>➕새로 만들기</p>
+            </li>
+          ) : (
+            <></>
+          )}
         </ul>
       )}
     </div>
