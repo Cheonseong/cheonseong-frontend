@@ -18,20 +18,20 @@ interface AutoCompletionInputProps {
 
 const AutoCompletionInput = ({
   inputType,
-  inputValue: inputValue_,
+  inputValue,
   inputOnChange,
   inputPlaceholder,
   inputWidth,
   data,
 }: AutoCompletionInputProps) => {
-  const [inputValue, setInputValue] = useState<string>(inputValue_);
-  const [filteredUsers, setFilteredUsers] = useState<AutoCompletionRecord[]>([]);
+  const [inputInnerText, setInnerText] = useState<string>(inputValue);
+  const [filteredValues, setFilteredUsers] = useState<AutoCompletionRecord[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState<number>(0);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const suggestionListRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
-    const trimmedInput = inputValue.trim().toLowerCase();
+    const trimmedInput = inputInnerText.trim().toLowerCase();
 
     if (trimmedInput === '') {
       const sortedUsers = data.sort(
@@ -49,16 +49,16 @@ const AutoCompletionInput = ({
         });
       setFilteredUsers(filtered.slice(0, 10));
     }
-  }, [inputValue, data]);
+  }, [inputInnerText, data]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setInputValue(e.target.value);
+    setInnerText(e.target.value);
     setShowSuggestions(true);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'ArrowDown') {
-      if (activeSuggestionIndex < filteredUsers.length - 1) {
+      if (activeSuggestionIndex < filteredValues.length - 1) {
         setActiveSuggestionIndex((prev) => prev + 1);
         scrollToActiveSuggestion(activeSuggestionIndex + 1);
       }
@@ -98,12 +98,12 @@ const AutoCompletionInput = ({
   };
 
   const autoCompleteSuggestion = (index: number): void => {
-    if (filteredUsers.length > 0) {
-      data.filter((record) => record.value === filteredUsers[index].value)[0].lastSelectedAt =
+    if (filteredValues.length > 0) {
+      data.filter((record) => record.value === filteredValues[index].value)[0].lastSelectedAt =
         new Date();
-      setInputValue(filteredUsers[index].value);
+      setInnerText(filteredValues[index].value);
       setShowSuggestions(false);
-      inputOnChange(filteredUsers[index].value);
+      inputOnChange(filteredValues[index].value);
     }
   };
 
@@ -121,7 +121,7 @@ const AutoCompletionInput = ({
         id="search-input"
         type={inputType || 'search'}
         placeholder={inputPlaceholder}
-        value={inputValue}
+        value={inputInnerText}
         onChange={(e) => {
           handleInputChange(e);
           inputOnChange && inputOnChange(e.target.value);
@@ -137,7 +137,7 @@ const AutoCompletionInput = ({
           ref={suggestionListRef}
           className="absolute z-10 max-h-52 w-full overflow-y-auto rounded border border-gray-300 bg-white shadow"
         >
-          {filteredUsers.map((user, index) => (
+          {filteredValues.map((user, index) => (
             <li
               key={index}
               className={`flex cursor-pointer items-center justify-between p-2 ${
@@ -156,13 +156,13 @@ const AutoCompletionInput = ({
               )}
             </li>
           ))}
-          {filteredUsers.length === 0 ? (
+          {filteredValues.length === 0 ? (
             <li
-              key={filteredUsers.length + 1}
+              key={filteredValues.length + 1}
               className={`cursor-pointer items-center justify-between bg-sky-100 p-2 text-left`}
               onClick={() => {}}
             >
-              <span className="break-keep">{inputValue}</span>
+              <span className="break-keep">{inputInnerText}</span>
               <br />
               <p>➕새로 만들기</p>
             </li>
