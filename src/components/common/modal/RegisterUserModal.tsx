@@ -1,17 +1,17 @@
 import { useState, useImperativeHandle, forwardRef, ChangeEvent } from 'react';
 import { userSampleData } from '../../AccountTable/AccountData';
 
-interface AddUserModalProps {
+interface RegisterUserModalProps {
   initialInputValue?: string;
-  onAdd: (value: string) => void;
+  onRegister: (value: string) => void;
 }
 
-interface AddUserModalRef {
+interface RegisterUserModalRef {
   openModal: (value: string) => void;
   closeModal: () => void;
 }
 
-const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>((props, ref) => {
+const RegisterUserModal = forwardRef<RegisterUserModalRef, RegisterUserModalProps>((props, ref) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [nameInputValue, setNameInputValue] = useState<string>(props.initialInputValue || '');
   const [messageValue, setMessageValue] = useState<string>('오타가 없는지 잘 확인해주세요.');
@@ -27,8 +27,8 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>((props, ref)
     setNameInputValue('');
   };
 
-  const handleAdd = () => {
-    props.onAdd(nameInputValue);
+  const handleRegister = () => {
+    props.onRegister(nameInputValue);
     closeModal();
   };
 
@@ -81,7 +81,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>((props, ref)
                   취소
                 </button>
                 <button
-                  onClick={handleAdd}
+                  onClick={handleRegister}
                   className="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-500 disabled:text-gray-400"
                   disabled={!isConfirmButtonEnabled}
                 >
@@ -96,7 +96,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>((props, ref)
   );
 });
 
-AddUserModal.displayName = 'AddUserModal';
+RegisterUserModal.displayName = 'RegisterUserModal';
 
-export type { AddUserModalRef };
-export default AddUserModal;
+export type { RegisterUserModalRef };
+export default RegisterUserModal;

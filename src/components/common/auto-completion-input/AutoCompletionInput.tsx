@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent, FocusEvent } f
 
 interface AutoCompletionRecord {
   value: string;
-  type: string | null | undefined;
+  type?: string | null | undefined;
   lastSelectedAt: Date;
 }
 
@@ -39,7 +39,7 @@ const AutoCompletionInput = ({
       const sortedUsers = data.sort(
         (a, b) => b.lastSelectedAt.getTime() - a.lastSelectedAt.getTime(),
       );
-      setFilteredUsers(sortedUsers.slice(0, 10));
+      setFilteredUsers(sortedUsers);
     } else {
       const filtered = data
         .filter((user) => !!user.value.match(getRegExp(trimmedInput)))
@@ -49,7 +49,7 @@ const AutoCompletionInput = ({
             (b.value.match(getRegExp(trimmedInput))?.index ?? trimmedInput.length)
           );
         });
-      setFilteredUsers(filtered.slice(0, 10));
+      setFilteredUsers(filtered);
     }
   }, [inputInnerText, data]);
 

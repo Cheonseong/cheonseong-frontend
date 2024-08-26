@@ -1,7 +1,7 @@
 import { AccountRecord, userSampleData } from '../../AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
 import AutoCompletionInput from '../../../common/auto-completion-input/AutoCompletionInput';
-import AddUserModal, { AddUserModalRef } from '../../../common/modal/AddUserModal';
+import RegisterUserModal, { RegisterUserModalRef } from '../../../common/modal/RegisterUserModal';
 import { useEffect, useRef } from 'react';
 
 interface UserNameColumnInEditModeProps {
@@ -17,7 +17,7 @@ const UserNameColumnInEditMode = ({
   accountData,
   setAccountData,
 }: UserNameColumnInEditModeProps) => {
-  const modalRef = useRef<AddUserModalRef>(null);
+  const modalRef = useRef<RegisterUserModalRef>(null);
 
   useEffect(() => {
     if (!modalRef.current) {
@@ -49,9 +49,9 @@ const UserNameColumnInEditMode = ({
         }}
         data={userSampleData}
       />
-      <AddUserModal
+      <RegisterUserModal
         ref={modalRef}
-        onAdd={(newUserName) => {
+        onRegister={(newUserName) => {
           // TODO: request to server
           console.log(`user ${newUserName} is successfully registered!`);
         }}

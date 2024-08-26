@@ -1,6 +1,10 @@
-import { FocusEvent } from 'react';
-import { AccountRecord } from '../../AccountData';
+import { AccountRecord, categorySampleData } from '../../AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
+import AutoCompletionInput from '../../../common/auto-completion-input/AutoCompletionInput';
+import { useRef } from 'react';
+import RegisterCategoryModal, {
+  RegisterCategoryModalRef,
+} from '../../../common/modal/RegisterCategoryModal';
 
 interface CategoryNameColumnInEditModeProps {
   index: number;
@@ -15,25 +19,38 @@ const CategoryNameColumnInEditMode = ({
   accountData,
   setAccountData,
 }: CategoryNameColumnInEditModeProps) => {
+  const modalRef = useRef<RegisterCategoryModalRef>(null);
+
   const handleInputChange = (index: number, value: string) => {
     const updatedData = [...accountData];
     updatedData[index].categoryName = value;
     setAccountData(updatedData);
   };
 
-  const handleFocus = (e: FocusEvent<HTMLInputElement>): void => {
-    e.target.select();
+  const openModal = (value: string) => {
+    if (modalRef.current) {
+      modalRef.current.openModal(value);
+    }
   };
 
   return (
     <td className={accountTableCellStyle}>
-      <input
-        type="text"
-        value={record.categoryName}
-        onChange={(e) => handleInputChange(index, e.target.value)}
-        onFocus={handleFocus}
-        className="w-24 rounded border border-gray-300 px-2 py-1"
-        placeholder="분류"
+      <AutoCompletionInput
+        inputValue={record.categoryName}
+        inputOnChange={(value) => handleInputChange(index, value)}
+        inputPlaceholder="분류"
+        inputWidth={32}
+        data={categorySampleData}
+        addNewRecordFn={(value) => {
+          openModal(value);
+        }}
+      />
+      <RegisterCategoryModal
+        ref={modalRef}
+        onRegister={(newCategoryName) => {
+          // TODO: request to server
+          console.log(`category ${newCategoryName} is successfully registered!`);
+        }}
       />
     </td>
   );
