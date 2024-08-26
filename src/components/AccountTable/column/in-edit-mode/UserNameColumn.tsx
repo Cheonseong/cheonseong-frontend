@@ -1,5 +1,6 @@
-import { AccountRecord } from '../../AccountData';
+import { AccountRecord, userSampleData } from '../../AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
+import AutoCompletionInput from '../../auto-completion/AutoCompletionInput';
 
 interface UserNameColumnInEditModeProps {
   index: number;
@@ -22,12 +23,20 @@ const UserNameColumnInEditMode = ({
 
   return (
     <td className={accountTableCellStyle}>
-      <input
+      {/* <input
         type="text"
         value={record.userName}
         onChange={(e) => handleInputChange(index, e.target.value)}
         className="w-24 rounded border border-gray-300 px-2 py-1"
         placeholder="이름"
+      /> */}
+
+      <AutoCompletionInput
+        inputValue={record.userName}
+        inputOnChange={(value) => handleInputChange(index, value)}
+        inputPlaceholder="이름"
+        inputWidth={32}
+        data={userSampleData}
       />
     </td>
   );
