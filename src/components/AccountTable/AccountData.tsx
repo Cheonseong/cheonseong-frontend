@@ -1,4 +1,4 @@
-import { AutoCompletionRecord } from './auto-completion/AutoCompletionInput';
+import { AutoCompletionRecord } from '../common/auto-completion-input/AutoCompletionInput';
 import { INOUT_TYPE } from './constant';
 
 interface AccountRecord {
@@ -57,6 +57,39 @@ const initialAccountSampleData: AccountRecord[] = [
     userName: '정예찬',
     detail: '',
   },
+];
+
+interface CategoryRecord {
+  categoryName: string;
+}
+
+const categorySampleData: CategoryRecord[] = [
+  { categoryName: '감사' },
+  { categoryName: '교회관리비' },
+  { categoryName: '구제' },
+  { categoryName: '구제(화재)' },
+  { categoryName: '노회비' },
+  { categoryName: '목회활동비' },
+  { categoryName: '복지후생' },
+  { categoryName: '복지후생비' },
+  { categoryName: '부서지원' },
+  { categoryName: '부활감사' },
+  { categoryName: '사례비' },
+  { categoryName: '상여금' },
+  { categoryName: '선교' },
+  { categoryName: '선교비' },
+  { categoryName: '신년감사' },
+  { categoryName: '심방,접대,경조' },
+  { categoryName: '십일조' },
+  { categoryName: '예금이자' },
+  { categoryName: '예탁적금' },
+  { categoryName: '장학' },
+  { categoryName: '장학금' },
+  { categoryName: '적금' },
+  { categoryName: '주정' },
+  { categoryName: '차량관리비' },
+  { categoryName: '행사비' },
+  { categoryName: '화재구재' },
 ];
 
 const userSampleData: AutoCompletionRecord[] = [
@@ -151,4 +184,10 @@ const loadNextAccountData = () => {
 };
 
 export type { AccountRecord };
-export { initialAccountSampleData, loadPreviousAccountData, loadNextAccountData, userSampleData };
+export {
+  initialAccountSampleData,
+  loadPreviousAccountData,
+  loadNextAccountData,
+  userSampleData,
+  categorySampleData,
+};

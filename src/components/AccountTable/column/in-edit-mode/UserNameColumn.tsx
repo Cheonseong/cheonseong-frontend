@@ -1,6 +1,8 @@
 import { AccountRecord, userSampleData } from '../../AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
-import AutoCompletionInput from '../../auto-completion/AutoCompletionInput';
+import AutoCompletionInput from '../../../common/auto-completion-input/AutoCompletionInput';
+import AddUserModal, { AddUserModalRef } from '../../../common/modal/AddUserModal';
+import { useEffect, useRef } from 'react';
 
 interface UserNameColumnInEditModeProps {
   index: number;
@@ -15,6 +17,20 @@ const UserNameColumnInEditMode = ({
   accountData,
   setAccountData,
 }: UserNameColumnInEditModeProps) => {
+  const modalRef = useRef<AddUserModalRef>(null);
+
+  useEffect(() => {
+    if (!modalRef.current) {
+      console.error('modalRef is not attached');
+    }
+  }, []);
+
+  const openModal = (value: string) => {
+    if (modalRef.current) {
+      modalRef.current.openModal(value);
+    }
+  };
+
   const handleInputChange = (index: number, value: string) => {
     const updatedData = [...accountData];
     updatedData[index].userName = value;
@@ -28,8 +44,17 @@ const UserNameColumnInEditMode = ({
         inputOnChange={(value) => handleInputChange(index, value)}
         inputPlaceholder="이름"
         inputWidth={32}
-        addNewRecordFn={(value) => console.log(`사용자 ${value}을(를) 등록합니다.`)}
+        addNewRecordFn={(value) => {
+          openModal(value);
+        }}
         data={userSampleData}
+      />
+      <AddUserModal
+        ref={modalRef}
+        onAdd={(newUserName) => {
+          // TODO: request to server
+          console.log(`user ${newUserName} is successfully registered!`);
+        }}
       />
     </td>
   );
