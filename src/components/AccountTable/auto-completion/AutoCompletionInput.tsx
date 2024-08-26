@@ -13,6 +13,7 @@ interface AutoCompletionInputProps {
   inputOnChange: (value: string) => void | undefined;
   inputPlaceholder: string;
   inputWidth: number | 'full';
+  addNewRecordFn?: (value: string) => void;
   data: AutoCompletionRecord[];
 }
 
@@ -22,6 +23,7 @@ const AutoCompletionInput = ({
   inputOnChange,
   inputPlaceholder,
   inputWidth,
+  addNewRecordFn,
   data,
 }: AutoCompletionInputProps) => {
   const [inputInnerText, setInnerText] = useState<string>(inputValue);
@@ -156,15 +158,17 @@ const AutoCompletionInput = ({
               )}
             </li>
           ))}
-          {filteredValues.length === 0 ? (
+          {addNewRecordFn &&
+          inputInnerText.trim().match(/^[가-힣]+$/gm) &&
+          filteredValues.length === 0 ? (
             <li
               key={filteredValues.length + 1}
               className={`cursor-pointer items-center justify-between bg-sky-100 p-2 text-left`}
-              onClick={() => {}}
+              onClick={() => addNewRecordFn(inputInnerText.trim())}
             >
-              <span className="break-keep">{inputInnerText}</span>
+              <span className="break-keep">{inputInnerText.trim()}</span>
               <br />
-              <p>➕새로 만들기</p>
+              <p>➕새로 등록</p>
             </li>
           ) : (
             <></>
