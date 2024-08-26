@@ -1,4 +1,5 @@
 import { AccountRecord } from '../../AccountData';
+import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface InoutTypeColumnProps {
   record: AccountRecord;
@@ -6,7 +7,7 @@ interface InoutTypeColumnProps {
 
 const InoutTypeColumn = ({ record }: InoutTypeColumnProps) => {
   return (
-    <td className="border border-gray-300 px-4 py-2">
+    <td className={accountTableCellStyle}>
       <p
         className={`font-semibold ${
           record.inoutType === '수입' ? 'text-green-500' : 'text-red-500'

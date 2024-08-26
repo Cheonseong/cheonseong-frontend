@@ -1,5 +1,6 @@
 import { getLocaleString } from '../../../../utils/date';
 import { AccountRecord } from '../../AccountData';
+import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface AccountDateColumnInEditModeProps {
   index: number;
@@ -27,7 +28,7 @@ const AccountDateColumnInEditMode = ({
   };
 
   return (
-    <td className="border border-gray-300 px-4 py-2">
+    <td className={accountTableCellStyle}>
       {
         <div className="flex flex-col items-center">
           <button

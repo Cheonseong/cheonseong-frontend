@@ -6,7 +6,11 @@ interface AccountTableFooterProps {
   setEditModeIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const AccountTableFooter = ({ accountData, setAccountData, setEditModeIndex }: AccountTableFooterProps) => {
+const AccountTableFooter = ({
+  accountData,
+  setAccountData,
+  setEditModeIndex,
+}: AccountTableFooterProps) => {
   const addRow = () => {
     const lastRecord = accountData[accountData.length - 1];
     const newRecord: AccountRecord = {

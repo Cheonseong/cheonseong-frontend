@@ -1,4 +1,5 @@
 import { AccountRecord } from '../../AccountData';
+import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface CategoryNameColumnInEditModeProps {
   index: number;
@@ -20,7 +21,7 @@ const CategoryNameColumnInEditMode = ({
   };
 
   return (
-    <td className="border border-gray-300 px-4 py-2">
+    <td className={accountTableCellStyle}>
       <input
         type="text"
         value={record.categoryName}

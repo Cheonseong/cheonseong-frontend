@@ -1,5 +1,6 @@
 import { toKoreanPronunciation } from '../../../../utils/currency';
 import { AccountRecord } from '../../AccountData';
+import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface AmountColumnInEditModeProps {
   index: number;
@@ -35,7 +36,7 @@ const AmountColumnInEditMode = ({
   };
 
   return (
-    <td className="border border-gray-300 px-4 py-2">
+    <td className={accountTableCellStyle}>
       <div className="flex flex-col items-center">
         <button
           onClick={() => incrementAmount(index)}

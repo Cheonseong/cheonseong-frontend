@@ -1,5 +1,6 @@
 import { getLocaleString } from '../../../../utils/date';
 import { AccountRecord } from '../../AccountData';
+import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface AccountDateColumnProps {
   record: AccountRecord;
@@ -7,7 +8,7 @@ interface AccountDateColumnProps {
 
 const AccountDateColumn = ({ record }: AccountDateColumnProps) => {
   return (
-    <td className="border border-gray-300 px-4 py-2">
+    <td className={accountTableCellStyle}>
       <p>{getLocaleString(record.accountDate)}</p>
     </td>
   );

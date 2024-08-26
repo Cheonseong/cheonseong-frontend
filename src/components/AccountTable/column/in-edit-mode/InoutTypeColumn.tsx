@@ -1,4 +1,5 @@
 import { AccountRecord } from '../../AccountData';
+import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface InoutTypeColumnInEditModeProps {
   index: number;
@@ -20,7 +21,7 @@ const InoutTypeColumnInEditMode = ({
   };
 
   return (
-    <td className="border border-gray-300 px-4 py-2">
+    <td className={accountTableCellStyle}>
       {
         <div className="flex justify-center">
           <button

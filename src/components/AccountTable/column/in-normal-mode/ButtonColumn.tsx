@@ -1,4 +1,5 @@
 import { AccountRecord } from '../../AccountData';
+import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface ButtonColumnProps {
   index: number;
@@ -23,7 +24,7 @@ const ButtonColumn = ({
   };
 
   return (
-    <td className="border border-gray-300 px-4 py-2">
+    <td className={accountTableCellStyle}>
       <button
         onClick={() => handleDeleteRowButton(index)}
         className="text-red-500 hover:text-red-700"

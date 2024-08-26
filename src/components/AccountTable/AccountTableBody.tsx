@@ -23,6 +23,8 @@ interface AccountTableBodyProps {
   setEditModeIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
+const accountTableCellStyle = 'border border-gray-300 px-4 py-2';
+
 const AccountTableBody = ({
   accountData,
   setAccountData,
@@ -45,14 +47,14 @@ const AccountTableBody = ({
     <table className="w-full table-auto border-collapse border border-gray-300">
       <thead>
         <tr className="bg-gray-200">
-          <th className="w-1/14 border border-gray-300 px-4 py-2">#</th>
-          <th className="w-2/14 border border-gray-300 px-4 py-2">날짜</th>
-          <th className="w-5/14 border border-gray-300 px-4 py-2">분류</th>
-          <th className="w-2/14 border border-gray-300 px-4 py-2">수입/지출</th>
-          <th className="w-1/14 border border-gray-300 px-4 py-2">금액</th>
-          <th className="w-2/14 border border-gray-300 px-4 py-2">이름</th>
-          <th className="w-3/14 border border-gray-300 px-4 py-2">비고</th>
-          <th className="w-1/14 border border-gray-300 px-4 py-2"></th>
+          <th className={'w-1/14' + accountTableCellStyle}>#</th>
+          <th className={'w-2/14' + accountTableCellStyle}>날짜</th>
+          <th className={'w-5/14' + accountTableCellStyle}>분류</th>
+          <th className={'w-2/14' + accountTableCellStyle}>수입/지출</th>
+          <th className={'w-1/14' + accountTableCellStyle}>금액</th>
+          <th className={'w-2/14' + accountTableCellStyle}>이름</th>
+          <th className={'w-3/14' + accountTableCellStyle}>비고</th>
+          <th className={'w-1/14' + accountTableCellStyle}></th>
         </tr>
       </thead>
       <tbody>
@@ -128,4 +130,5 @@ const AccountTableBody = ({
   );
 };
 
+export { accountTableCellStyle };
 export default AccountTableBody;
