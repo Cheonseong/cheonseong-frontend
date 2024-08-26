@@ -23,14 +23,6 @@ const UserNameColumnInEditMode = ({
 
   return (
     <td className={accountTableCellStyle}>
-      {/* <input
-        type="text"
-        value={record.userName}
-        onChange={(e) => handleInputChange(index, e.target.value)}
-        className="w-24 rounded border border-gray-300 px-2 py-1"
-        placeholder="이름"
-      /> */}
-
       <AutoCompletionInput
         inputValue={record.userName}
         inputOnChange={(value) => handleInputChange(index, value)}

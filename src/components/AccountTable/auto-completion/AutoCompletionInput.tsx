@@ -1,10 +1,10 @@
 import { getRegExp } from 'korean-regexp';
-import React, { useState, useEffect, useRef, KeyboardEvent, ChangeEvent, FocusEvent } from 'react';
+import { useState, useEffect, useRef, KeyboardEvent, ChangeEvent, FocusEvent } from 'react';
 
 interface AutoCompletionRecord {
   value: string;
   type: string | null | undefined;
-  updatedAt: Date;
+  lastSelectedAt: Date;
 }
 
 interface AutoCompletionInputProps {
@@ -34,7 +34,9 @@ const AutoCompletionInput = ({
     const trimmedInput = inputValue.trim().toLowerCase();
 
     if (trimmedInput === '') {
-      const sortedUsers = data.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+      const sortedUsers = data.sort(
+        (a, b) => b.lastSelectedAt.getTime() - a.lastSelectedAt.getTime(),
+      );
       setFilteredUsers(sortedUsers.slice(0, 10));
     } else {
       const filtered = data
@@ -97,6 +99,8 @@ const AutoCompletionInput = ({
 
   const autoCompleteSuggestion = (index: number): void => {
     if (filteredUsers.length > 0) {
+      data.filter((record) => record.value === filteredUsers[index].value)[0].lastSelectedAt =
+        new Date();
       setInputValue(filteredUsers[index].value);
       setShowSuggestions(false);
       inputOnChange(filteredUsers[index].value);
@@ -112,7 +116,7 @@ const AutoCompletionInput = ({
   };
 
   return (
-    <div className={'relative ' + `w-${inputWidth}`}>
+    <div className={'relative mx-auto content-center ' + `w-${inputWidth}`}>
       <input
         id="search-input"
         type={inputType || 'search'}
