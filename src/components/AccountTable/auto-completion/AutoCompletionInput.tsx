@@ -115,7 +115,7 @@ const AutoCompletionInput = ({
     <div className={'relative ' + `w-${inputWidth}`}>
       <input
         id="search-input"
-        type={inputType || 'text'}
+        type={inputType || 'search'}
         placeholder={inputPlaceholder}
         value={inputValue}
         onChange={(e) => {
