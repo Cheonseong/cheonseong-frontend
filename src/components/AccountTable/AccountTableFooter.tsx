@@ -46,7 +46,7 @@ const AccountTableFooter = ({
 
   return (
     <>
-      <div className="relative mb-12">
+      <div className="relative my-12">
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
           <div className="mt-2 flex items-center justify-between">
             <div className="flex justify-center">
