@@ -3,6 +3,23 @@ import { accountTableCellStyle } from '../../AccountTableBody';
 import AutoCompletionInput from '../../../common/auto-completion-input/AutoCompletionInput';
 import RegisterUserModal, { RegisterUserModalRef } from '../../../common/modal/RegisterUserModal';
 import { useEffect, useRef } from 'react';
+import VerboseErrorSign from '../../../common/error-sign/VerboseErrorSign';
+import { ErrorMessage } from '../../../common/error-sign/errorMessage';
+
+const UserNameColumnErrorSign = ({ record }: { [key: string]: AccountRecord }) => {
+  return record.userName === '' ? (
+    <>
+      <VerboseErrorSign fontSize="text-xs" errorMessage={ErrorMessage.USER_NOT_SELECTED} />
+      <span>{record.userName}</span>
+    </>
+  ) : userSampleData.filter((x) => x.value === record.userName).length === 0 ? (
+    <>
+      <VerboseErrorSign fontSize="text-xs" errorMessage={ErrorMessage.USER_NOT_REGISTERED} />
+    </>
+  ) : (
+    <></>
+  );
+};
 
 interface UserNameColumnInEditModeProps {
   index: number;
@@ -49,6 +66,9 @@ const UserNameColumnInEditMode = ({
         }}
         data={userSampleData}
       />
+
+      <UserNameColumnErrorSign record={record} />
+
       <RegisterUserModal
         ref={modalRef}
         onRegister={(newUserName) => {

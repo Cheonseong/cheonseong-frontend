@@ -32,7 +32,7 @@ const CompactErrorSign = ({ fontSize, errorMessage }: CompactErrorSignProps) => 
     >
       !
       {hovered && (
-        <span className="absolute bottom-full left-0 mb-2 whitespace-nowrap rounded-md bg-rose-50 p-2 font-semibold text-rose-600 shadow-lg">
+        <span className="absolute bottom-full left-0 mb-2 whitespace-nowrap rounded-md bg-rose-50 p-2 text-sm font-semibold text-rose-600 shadow-lg">
           {errorMessage}
         </span>
       )}

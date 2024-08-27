@@ -5,6 +5,23 @@ import { useRef } from 'react';
 import RegisterCategoryModal, {
   RegisterCategoryModalRef,
 } from '../../../common/modal/RegisterCategoryModal';
+import VerboseErrorSign from '../../../common/error-sign/VerboseErrorSign';
+import { ErrorMessage } from '../../../common/error-sign/errorMessage';
+
+const CategoryNameColumnErrorSign = ({ record }: { [key: string]: AccountRecord }) => {
+  return record.categoryName === '' ? (
+    <>
+      <VerboseErrorSign fontSize="text-xs" errorMessage={ErrorMessage.CATEGORY_NOT_SELECTED} />
+      <span>{record.categoryName}</span>
+    </>
+  ) : categorySampleData.filter((x) => x.value === record.categoryName).length === 0 ? (
+    <>
+      <VerboseErrorSign fontSize="text-xs" errorMessage={ErrorMessage.CATEGORY_NOT_REGISTERED} />
+    </>
+  ) : (
+    <></>
+  );
+};
 
 interface CategoryNameColumnInEditModeProps {
   index: number;
@@ -45,6 +62,9 @@ const CategoryNameColumnInEditMode = ({
           openModal(value);
         }}
       />
+
+      <CategoryNameColumnErrorSign record={record} />
+
       <RegisterCategoryModal
         ref={modalRef}
         initialInputValue={record.categoryName}
