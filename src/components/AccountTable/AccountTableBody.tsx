@@ -23,7 +23,7 @@ interface AccountTableBodyProps {
   setEditModeIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const accountTableCellStyle = 'border border-gray-300 px-4 py-2';
+const accountTableCellStyle = 'select-none border border-gray-300 px-4 py-2';
 
 const AccountTableBody = ({
   accountData,
@@ -46,7 +46,7 @@ const AccountTableBody = ({
   return (
     <table className="w-full table-auto border-collapse border border-gray-300">
       <thead>
-        <tr>
+        <tr className="select-none">
           <th className={'sticky bg-gray-200 z-10 top-0 w-1/14' + accountTableCellStyle}>#</th>
           <th className={'sticky bg-gray-200 z-10 top-0 w-2/14' + accountTableCellStyle}>날짜</th>
           <th className={'sticky bg-gray-200 z-10 top-0 w-5/14' + accountTableCellStyle}>분류</th>
