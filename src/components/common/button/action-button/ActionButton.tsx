@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-interface ButtonProps {
+interface ActionButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
   className?: string;
   innerText?: string;
@@ -8,7 +8,7 @@ interface ButtonProps {
   children?: ReactElement | string;
 }
 
-const Button = ({ onClick, className, disabled, children }: ButtonProps) => {
+const ActionButton = ({ onClick, className, disabled, children }: ActionButtonProps) => {
   return (
     <button
       onClick={onClick}
@@ -23,4 +23,4 @@ const Button = ({ onClick, className, disabled, children }: ButtonProps) => {
   );
 };
 
-export default Button;
+export default ActionButton;

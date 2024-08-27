@@ -1,7 +1,7 @@
 import { useState, useImperativeHandle, forwardRef, ChangeEvent } from 'react';
 import { categorySampleData } from '../../AccountTable/data/AccountData';
-import Button from '../button/Button';
-import NonHighlightedButton from '../button/NonHighlightedButton';
+import ActionButton from '../button/action-button/ActionButton';
+import NonHighlightedActionButton from '../button/action-button/NonHighlightedActionButton';
 import {
   getNotSimilarNames,
   getSimilarNames,
@@ -114,10 +114,10 @@ const RegisterCategoryModal = forwardRef<RegisterCategoryModalRef, RegisterCateg
                 </div>
 
                 <div className="mt-6 flex justify-end space-x-2">
-                  <NonHighlightedButton onClick={closeModal}>취소</NonHighlightedButton>
-                  <Button onClick={handleRegister} disabled={!isConfirmButtonEnabled}>
+                  <NonHighlightedActionButton onClick={closeModal}>취소</NonHighlightedActionButton>
+                  <ActionButton onClick={handleRegister} disabled={!isConfirmButtonEnabled}>
                     등록
-                  </Button>
+                  </ActionButton>
                 </div>
               </div>
             </div>

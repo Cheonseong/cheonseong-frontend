@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-interface NonHighlightedButtonProps {
+interface NonHighlightedActionButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
   className?: string;
   innerText?: string;
@@ -8,12 +8,12 @@ interface NonHighlightedButtonProps {
   children?: ReactElement | string;
 }
 
-const NonHighlightedButton = ({
+const NonHighlightedActionButton = ({
   onClick,
   className,
   disabled,
   children,
-}: NonHighlightedButtonProps) => {
+}: NonHighlightedActionButtonProps) => {
   return (
     <button
       onClick={onClick}
@@ -28,4 +28,4 @@ const NonHighlightedButton = ({
   );
 };
 
-export default NonHighlightedButton;
+export default NonHighlightedActionButton;

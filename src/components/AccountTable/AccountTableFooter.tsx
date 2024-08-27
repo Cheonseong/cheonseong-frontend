@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { AccountRecord } from './data/AccountData';
-import Button from '../common/button/Button';
+import ActionButton from '../common/button/action-button/ActionButton';
 
 interface AccountTableFooterProps {
   accountData: AccountRecord[];
@@ -51,11 +51,11 @@ const AccountTableFooter = ({
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
           <div className="mt-2 flex items-center justify-between">
             <div className="flex justify-center">
-              <Button onClick={addRow}>항목 추가</Button>
-              <Button onClick={addMultipleRows}>항목 다수 추가</Button>
+              <ActionButton onClick={addRow}>항목 추가</ActionButton>
+              <ActionButton onClick={addMultipleRows}>항목 다수 추가</ActionButton>
             </div>
             <div className="mr-4">
-              <Button onClick={save}>저장</Button>
+              <ActionButton onClick={save}>저장</ActionButton>
             </div>
           </div>
         </div>
