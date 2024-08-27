@@ -1,6 +1,8 @@
 import { getLocaleString } from '../../../../utils/date';
 import { AccountRecord } from '../../data/AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
+import UpwardControlButton from '../../../common/button/control-button/UpwardControlButton';
+import DownwardControlButton from '../../../common/button/control-button/DownwardControlButton';
 
 interface AccountDateColumnInEditModeProps {
   index: number;
@@ -31,15 +33,11 @@ const AccountDateColumnInEditMode = ({
     <td className={accountTableCellStyle}>
       {
         <div className="flex flex-col items-center">
-          <button
-            onClick={() => incrementDay(index)}
-            className="mb-3 size-0 border-x-[7px] border-b-[10px] border-x-transparent border-b-gray-700"
-          ></button>
+          <UpwardControlButton onClick={() => incrementDay(index)} />
+
           <p>{getLocaleString(record.accountDate)}</p>
-          <button
-            onClick={() => decrementDay(index)}
-            className="mt-3 size-0 border-x-[7px] border-t-[10px] border-x-transparent border-t-gray-700"
-          ></button>
+
+          <DownwardControlButton onClick={() => decrementDay(index)} />
         </div>
       }
     </td>

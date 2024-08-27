@@ -1,3 +1,5 @@
+import LeftwardControlButton from '../common/button/control-button/LeftwardControlButton';
+import RightwardControlButton from '../common/button/control-button/RightwardControlButton';
 import { AccountRecord, loadNextAccountData, loadPreviousAccountData } from './data/AccountData';
 
 interface AccountTableHeaderProps {
@@ -20,12 +22,8 @@ const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
 
   return (
     <div className="relative mb-12">
-      <button
-        onClick={loadPreviousAccountData}
-        className="absolute left-0 top-1/2 -translate-y-1/2 px-4 py-2"
-      >
-        <div className="size-0 border-y-8 border-r-8 border-y-transparent border-r-black"></div>
-      </button>
+      <LeftwardControlButton onClick={loadPreviousAccountData} />
+
       <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
         <h3 className="text-center text-lg font-semibold">{`${year}.${month} ${week}주차`}</h3>
         <div className="mt-2 flex items-center justify-around">
@@ -44,12 +42,8 @@ const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
           </div>
         </div>
       </div>
-      <button
-        onClick={loadNextAccountData}
-        className="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2"
-      >
-        <div className="size-0 border-y-8 border-l-8 border-y-transparent border-l-black"></div>
-      </button>
+
+      <RightwardControlButton onClick={loadNextAccountData} />
     </div>
   );
 };
