@@ -1,4 +1,4 @@
-import { AccountRecord, loadNextAccountData, loadPreviousAccountData } from './AccountData';
+import { AccountRecord, loadNextAccountData, loadPreviousAccountData } from './data/AccountData';
 
 interface AccountTableHeaderProps {
   accountData: AccountRecord[];

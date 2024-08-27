@@ -1,4 +1,4 @@
-import { AccountRecord, categorySampleData } from '../../AccountData';
+import { AccountRecord, categorySampleData } from '../../data/AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
 import AutoCompletionInput from '../../../common/auto-completion-input/AutoCompletionInput';
 import { useRef } from 'react';

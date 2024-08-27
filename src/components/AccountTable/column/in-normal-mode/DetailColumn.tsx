@@ -1,4 +1,4 @@
-import { AccountRecord } from '../../AccountData';
+import { AccountRecord } from '../../data/AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface DetailColumnProps {

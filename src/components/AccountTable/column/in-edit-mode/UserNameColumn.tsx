@@ -1,4 +1,4 @@
-import { AccountRecord, userSampleData } from '../../AccountData';
+import { AccountRecord, userSampleData } from '../../data/AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
 import AutoCompletionInput from '../../../common/auto-completion-input/AutoCompletionInput';
 import RegisterUserModal, { RegisterUserModalRef } from '../../../common/modal/RegisterUserModal';

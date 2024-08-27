@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccountRecord } from './AccountData';
+import { AccountRecord } from './data/AccountData';
 import IndexColumn from './column/IndexColumn';
 import AccountDateColumn from './column/in-normal-mode/AccountDateColumn';
 import InoutTypeColumn from './column/in-normal-mode/InoutTypeColumn';

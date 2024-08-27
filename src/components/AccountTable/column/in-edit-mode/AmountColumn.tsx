@@ -1,6 +1,6 @@
 import { FocusEvent } from 'react';
 import { toKoreanPronunciation } from '../../../../utils/currency';
-import { AccountRecord } from '../../AccountData';
+import { AccountRecord } from '../../data/AccountData';
 import { accountTableCellStyle } from '../../AccountTableBody';
 
 interface AmountColumnInEditModeProps {

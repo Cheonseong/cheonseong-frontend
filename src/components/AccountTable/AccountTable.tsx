@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AccountTableHeader from './AccountTableHeader';
 import AccountTableBody from './AccountTableBody';
 import AccountTableFooter from './AccountTableFooter';
-import { AccountRecord, initialAccountSampleData } from './AccountData';
+import { AccountRecord, initialAccountSampleData } from './data/AccountData';
 
 const AccountTable: React.FC = () => {
   const [accountData, setAccountData] = useState<AccountRecord[]>(initialAccountSampleData);

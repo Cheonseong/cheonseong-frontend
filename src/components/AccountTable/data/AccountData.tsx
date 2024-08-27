@@ -1,5 +1,5 @@
-import { AutoCompletionRecord } from '../common/auto-completion-input/AutoCompletionInput';
-import { INOUT_TYPE } from './constant';
+import { AutoCompletionRecord } from '../../common/auto-completion-input/AutoCompletionInput';
+import { INOUT_TYPE } from '../constant';
 
 interface AccountRecord {
   accountId: string | undefined;

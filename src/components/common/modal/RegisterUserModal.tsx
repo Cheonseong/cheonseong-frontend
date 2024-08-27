@@ -1,5 +1,5 @@
 import { useState, useImperativeHandle, forwardRef, ChangeEvent } from 'react';
-import { userSampleData } from '../../AccountTable/AccountData';
+import { userSampleData } from '../../AccountTable/data/AccountData';
 
 interface RegisterUserModalProps {
   initialInputValue?: string;

@@ -1,5 +1,5 @@
-import { MouseEvent, MouseEventHandler, useEffect, useRef } from 'react';
-import { AccountRecord } from './AccountData';
+import { useRef } from 'react';
+import { AccountRecord } from './data/AccountData';
 import Button from '../common/button/Button';
 
 interface AccountTableFooterProps {
