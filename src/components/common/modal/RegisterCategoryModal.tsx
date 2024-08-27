@@ -51,8 +51,14 @@ const RegisterCategoryModal = forwardRef<RegisterCategoryModalRef, RegisterCateg
     const getSimilarNames = (pivotValue: string) => {
       return categorySampleData
         .map((record) => getJaccardDistance(record.value, pivotValue))
-        .map((jaccard, i) => (jaccard >= 0.2 ? categorySampleData[i].value : null))
-        .filter((x) => x) as string[];
+        .map((jaccard, i) =>
+          jaccard >= 0.2
+            ? { jaccard, categoryName: categorySampleData[i].value }
+            : { jaccard: 0, categoryName: '' },
+        )
+        .sort((a, b) => b.jaccard - a.jaccard)
+        .filter((x) => x.categoryName !== '')
+        .map((x) => x.categoryName);
     };
 
     const getNotSimilarNames = (pivotValue: string) => {
