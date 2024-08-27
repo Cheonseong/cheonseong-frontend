@@ -47,6 +47,7 @@ const CategoryNameColumnInEditMode = ({
       />
       <RegisterCategoryModal
         ref={modalRef}
+        initialInputValue={record.categoryName}
         onRegister={(newCategoryName) => {
           // TODO: request to server
           console.log(`category ${newCategoryName} is successfully registered!`);

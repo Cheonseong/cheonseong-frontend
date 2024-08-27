@@ -8,7 +8,7 @@ import {
 } from '../../AccountTable/data/categoryNameSimilarity';
 
 interface RegisterCategoryModalProps {
-  initialInputValue?: string;
+  initialInputValue: string;
   onRegister: (value: string) => void;
 }
 
@@ -25,6 +25,7 @@ const RegisterCategoryModal = forwardRef<RegisterCategoryModalRef, RegisterCateg
       '기존 분류명들과 의미가 겹치지 않는지 확인해주세요.',
     );
     const [isConfirmButtonEnabled, setIsConfirmButtonEnabled] = useState<boolean>(true);
+
     const [similarNames, setSimilarNames] = useState<string[]>(
       getSimilarNames(props.initialInputValue || ''),
     );
