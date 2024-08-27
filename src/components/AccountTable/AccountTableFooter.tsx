@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { MouseEvent, MouseEventHandler, useEffect, useRef } from 'react';
 import { AccountRecord } from './AccountData';
+import Button from '../common/button/Button';
 
 interface AccountTableFooterProps {
   accountData: AccountRecord[];
@@ -50,24 +51,11 @@ const AccountTableFooter = ({
         <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
           <div className="mt-2 flex items-center justify-between">
             <div className="flex justify-center">
-              <button
-                onClick={addRow}
-                className="mx-2 my-4 rounded bg-sky-600 px-4 py-2 text-white"
-              >
-                항목 추가
-              </button>
-
-              <button
-                onClick={addMultipleRows}
-                className="mx-2 my-4 rounded  bg-sky-600 px-4 py-2 text-white"
-              >
-                항목 다수 추가
-              </button>
+              <Button onClick={addRow}>항목 추가</Button>
+              <Button onClick={addMultipleRows}>항목 다수 추가</Button>
             </div>
             <div className="mr-4">
-              <button onClick={save} className="mx-2 my-4 rounded  bg-sky-600 px-4 py-2 text-white">
-                저장
-              </button>
+              <Button onClick={save}>저장</Button>
             </div>
           </div>
         </div>

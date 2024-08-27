@@ -1,5 +1,7 @@
 import { useState, useImperativeHandle, forwardRef, ChangeEvent } from 'react';
 import { categorySampleData } from '../../AccountTable/AccountData';
+import Button from '../button/Button';
+import NonHighlightedButton from '../button/NonHighlightedButton';
 
 interface RegisterCategoryModalProps {
   initialInputValue?: string;
@@ -134,19 +136,10 @@ const RegisterCategoryModal = forwardRef<RegisterCategoryModalRef, RegisterCateg
                 </div>
 
                 <div className="mt-6 flex justify-end space-x-2">
-                  <button
-                    onClick={closeModal}
-                    className="rounded bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                  >
-                    취소
-                  </button>
-                  <button
-                    onClick={handleRegister}
-                    className="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-500 disabled:text-gray-400"
-                    disabled={!isConfirmButtonEnabled}
-                  >
+                  <NonHighlightedButton onClick={closeModal}>취소</NonHighlightedButton>
+                  <Button onClick={handleRegister} disabled={!isConfirmButtonEnabled}>
                     등록
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
