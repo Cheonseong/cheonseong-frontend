@@ -46,15 +46,17 @@ const AccountTableBody = ({
   return (
     <table className="w-full table-auto border-collapse border border-gray-300">
       <thead>
-        <tr className="bg-gray-200">
-          <th className={'w-1/14' + accountTableCellStyle}>#</th>
-          <th className={'w-2/14' + accountTableCellStyle}>날짜</th>
-          <th className={'w-5/14' + accountTableCellStyle}>분류</th>
-          <th className={'w-2/14' + accountTableCellStyle}>수입/지출</th>
-          <th className={'w-1/14' + accountTableCellStyle}>금액</th>
-          <th className={'w-2/14' + accountTableCellStyle}>이름</th>
-          <th className={'w-3/14' + accountTableCellStyle}>비고</th>
-          <th className={'w-1/14' + accountTableCellStyle}></th>
+        <tr>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-1/14' + accountTableCellStyle}>#</th>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-2/14' + accountTableCellStyle}>날짜</th>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-5/14' + accountTableCellStyle}>분류</th>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-2/14' + accountTableCellStyle}>
+            수입/지출
+          </th>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-1/14' + accountTableCellStyle}>금액</th>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-2/14' + accountTableCellStyle}>이름</th>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-3/14' + accountTableCellStyle}>비고</th>
+          <th className={'sticky bg-gray-200 z-10 top-0 w-1/14' + accountTableCellStyle}></th>
         </tr>
       </thead>
       <tbody>
