@@ -26,7 +26,7 @@ const AccountTableHeader = ({ accountData }: AccountTableHeaderProps) => {
       >
         <div className="size-0 border-y-8 border-r-8 border-y-transparent border-r-black"></div>
       </button>
-      <div className="rounded-lg bg-white p-6 shadow-lg">
+      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
         <h3 className="text-center text-lg font-semibold">{`${year}.${month} ${week}주차`}</h3>
         <div className="mt-2 flex items-center justify-around">
           <div className="ml-4">
